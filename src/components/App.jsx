@@ -2,20 +2,31 @@ import React, { useState } from "react";
 import $ from "jquery";
 
 function App() {
-  const [headingText1, setHeadingText1] = useState("Hello");
-  const [headingText2, setHeadingText2] = useState("World!");
-  // const [onMouseEffect, setOnMouseEffect] = useState("white");
+  const [heading, setHeadingText] = useState({
+    Text1: "",
+    Text2: ""
+  });
+  function updateInput(e) {
+    const inputName = e.target.name;
+    const inputValue = e.target.value;
 
-  //applying event listener for input element
-  function updateFirstInput(e) {
-    setHeadingText1(e.target.value);
+    setHeadingText((preValue) => {
+      if (inputName === "fName") {
+        return {
+          Text1: inputValue,
+          Text2: preValue.Text2
+        };
+      } else if (inputName === "lName") {
+        return {
+          Text1: preValue.Text1,
+          Text2: inputValue
+        };
+      }
+    });
   }
-  function updateLastInput(e) {
-    setHeadingText2(e.target.value);
-  }
-  //applying event listener for button element
+
   function gotClicked(e) {
-    $("#heading").text(headingText1 + " " + headingText2);
+    $("#heading").text(heading.Text1 + " " + heading.Text2);
 
     e.preventDefault();
   }
@@ -31,11 +42,17 @@ function App() {
       <p>Submit your first name and last name to be shown above!</p>
       <form onSubmit={gotClicked}>
         <input
-          onChange={updateFirstInput}
+          onChange={updateInput}
+          name="fName"
           type="text"
           placeholder="First Name"
         />
-        <input onChange={updateLastInput} type="text" placeholder="Last Name" />
+        <input
+          onChange={updateInput}
+          name="lName"
+          type="text"
+          placeholder="Last Name"
+        />
         <button id="submitBTN" onMouseOver={mouseHover} onMouseOut={mouseOut}>
           Submit
         </button>
