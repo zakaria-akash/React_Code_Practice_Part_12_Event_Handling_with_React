@@ -10,8 +10,10 @@ function App() {
     setHeadingText(e.target.value);
   }
   //applying event listener for button element
-  function gotClicked() {
+  function gotClicked(e) {
     $("#heading").text(headingText);
+
+    e.preventDefault();
   }
   function mouseHover() {
     $("#submitBTN").css("background-color", "black");
@@ -22,19 +24,17 @@ function App() {
   return (
     <div className="container">
       <h1 id="heading">Hello</h1>
-      <input
-        onChange={inputValueChange}
-        type="text"
-        placeholder="What's your name?"
-      />
-      <button
-        id="submitBTN"
-        onClick={gotClicked}
-        onMouseOver={mouseHover}
-        onMouseOut={mouseOut}
-      >
-        Submit
-      </button>
+      <h2>Submit a title to be shown above!</h2>
+      <form onSubmit={gotClicked}>
+        <input
+          onChange={inputValueChange}
+          type="text"
+          placeholder="What's your name?"
+        />
+        <button id="submitBTN" onMouseOver={mouseHover} onMouseOut={mouseOut}>
+          Submit
+        </button>
+      </form>
     </div>
   );
 }
