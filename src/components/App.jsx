@@ -4,7 +4,8 @@ import $ from "jquery";
 function App() {
   const [heading, setHeadingText] = useState({
     Text1: "",
-    Text2: ""
+    Text2: "",
+    Email: ""
   });
   function updateInput(e) {
     const inputName = e.target.name;
@@ -14,12 +15,20 @@ function App() {
       if (inputName === "fName") {
         return {
           Text1: inputValue,
-          Text2: preValue.Text2
+          Text2: preValue.Text2,
+          Email: preValue.Email
         };
       } else if (inputName === "lName") {
         return {
           Text1: preValue.Text1,
-          Text2: inputValue
+          Text2: inputValue,
+          Email: preValue.Email
+        };
+      } else if (inputName === "email") {
+        return {
+          Text1: preValue.Text1,
+          Text2: preValue.Text2,
+          Email: inputValue
         };
       }
     });
@@ -27,6 +36,7 @@ function App() {
 
   function gotClicked(e) {
     $("#heading").text(heading.Text1 + " " + heading.Text2);
+    $("#mail").text(heading.Email);
 
     e.preventDefault();
   }
@@ -39,7 +49,8 @@ function App() {
   return (
     <div className="container">
       <h1 id="heading">Hello World!</h1>
-      <p>Submit your first name and last name to be shown above!</p>
+      <p id="mail">zakaria.akash@hotmail.com</p>
+      <p>Submit your first name, last name and email to be shown above!</p>
       <form onSubmit={gotClicked}>
         <input
           onChange={updateInput}
@@ -52,6 +63,12 @@ function App() {
           name="lName"
           type="text"
           placeholder="Last Name"
+        />
+        <input
+          onChange={updateInput}
+          name="email"
+          type="email"
+          placeholder="email"
         />
         <button id="submitBTN" onMouseOver={mouseHover} onMouseOut={mouseOut}>
           Submit
