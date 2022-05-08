@@ -5,9 +5,11 @@ function App() {
   const [headingText, setHeadingText] = useState("Hello");
   // const [onMouseEffect, setOnMouseEffect] = useState("white");
 
+  //applying event listener for input element
   function inputValueChange(e) {
     setHeadingText(e.target.value);
   }
+  //applying event listener for button element
   function gotClicked() {
     $("#heading").text(headingText);
   }
