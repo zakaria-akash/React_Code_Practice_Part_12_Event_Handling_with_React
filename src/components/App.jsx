@@ -2,16 +2,20 @@ import React, { useState } from "react";
 import $ from "jquery";
 
 function App() {
-  const [headingText, setHeadingText] = useState("Hello");
+  const [headingText1, setHeadingText1] = useState("Hello");
+  const [headingText2, setHeadingText2] = useState("World!");
   // const [onMouseEffect, setOnMouseEffect] = useState("white");
 
   //applying event listener for input element
-  function inputValueChange(e) {
-    setHeadingText(e.target.value);
+  function updateFirstInput(e) {
+    setHeadingText1(e.target.value);
+  }
+  function updateLastInput(e) {
+    setHeadingText2(e.target.value);
   }
   //applying event listener for button element
   function gotClicked(e) {
-    $("#heading").text(headingText);
+    $("#heading").text(headingText1 + " " + headingText2);
 
     e.preventDefault();
   }
@@ -23,14 +27,15 @@ function App() {
   }
   return (
     <div className="container">
-      <h1 id="heading">Hello</h1>
-      <h2>Submit a title to be shown above!</h2>
+      <h1 id="heading">Hello World!</h1>
+      <p>Submit your first name and last name to be shown above!</p>
       <form onSubmit={gotClicked}>
         <input
-          onChange={inputValueChange}
+          onChange={updateFirstInput}
           type="text"
-          placeholder="What's your name?"
+          placeholder="First Name"
         />
+        <input onChange={updateLastInput} type="text" placeholder="Last Name" />
         <button id="submitBTN" onMouseOver={mouseHover} onMouseOut={mouseOut}>
           Submit
         </button>
