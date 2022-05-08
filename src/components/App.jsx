@@ -4,10 +4,13 @@ import $ from "jquery";
 function App() {
   const [headingText, setHeadingText] = useState("Hello");
   // const [onMouseEffect, setOnMouseEffect] = useState("white");
-  function gotClicked() {
-    setHeadingText("Submitted");
-  }
 
+  function inputValueChange(e) {
+    setHeadingText(e.target.value);
+  }
+  function gotClicked() {
+    $("#heading").text(headingText);
+  }
   function mouseHover() {
     $("#submitBTN").css("background-color", "black");
   }
@@ -16,8 +19,12 @@ function App() {
   }
   return (
     <div className="container">
-      <h1>{headingText}</h1>
-      <input type="text" placeholder="What's your name?" />
+      <h1 id="heading">Hello</h1>
+      <input
+        onChange={inputValueChange}
+        type="text"
+        placeholder="What's your name?"
+      />
       <button
         id="submitBTN"
         onClick={gotClicked}
